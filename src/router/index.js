@@ -1,28 +1,41 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: "/",
     name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+        import ( /* webpackChunkName: "Home" */ "../views/Home.vue")
+}, {
+    path: "/Fav",
+    name: "Fav",
+    component: () =>
+        import ( /* webpackChunkName: "Fav" */ "../views/Fav.vue")
+}, {
+    path: "/Login",
+    name: "Login",
+    component: () =>
+        import ( /* webpackChunkName: "Login" */ "../views/Login.vue")
+}, {
+    path: "/NotFound",
+    name: "NotFound",
+    component: () =>
+        import ( /* webpackChunkName: "NotFound" */ "../views/NotFound.vue")
+}, {
+    path: "/Perfil",
+    name: "Perfil",
+    component: () =>
+        import ( /* webpackChunkName: "Perfil" */ "../views/Perfil.vue")
+}, {
+    path: "/RegistroUser",
+    name: "RegistroUser",
+    component: () =>
+        import ( /* webpackChunkName: "RegistroUser" */ "../views/RegistroUser.vue")
+}, ];
 
 const router = new VueRouter({
-  routes
+    routes
 });
 
 export default router;
