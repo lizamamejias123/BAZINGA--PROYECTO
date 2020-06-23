@@ -1,6 +1,7 @@
 # Bazinga
 
 ![](/public/img/icons/bazinga.png){:height="700px" width="400px"}
+<img width="200" alt="bazinga" src="/public/img/icons/bazinga.png">
 
 Bazinga es un Sitio Web en el cual puedes encontrar información de Series de ciencia ficción derivadas de Comic. Podras encontrar de todas las series actuales con cantidad de episodios, filtrar por nombre de la serie.
 
