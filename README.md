@@ -1,6 +1,17 @@
-# bazinga2
+# Bazinga
 
-## Project setup
+<img style="margin:auto" width="500px" alt="bazinga" src="/public/img/icons/bazinga.png">
+
+Bazinga es un Sitio Web en el cual puedes encontrar información de Series de ciencia ficción derivadas de Comic. Podras encontrar de todas las series actuales con cantidad de episodios, filtrar por nombre de la serie.
+
+## Guia de Estilo
+
+
+## Diseño
+
+
+
+## Instalacion del proyecto
 ```
 npm install
 ```
