@@ -1,7 +1,7 @@
 <template>
     <div>
 <!-- Login texto -->
-     <div>
+<div>
   <b-jumbotron header="Login" class="banner" lead="¡Ingresa Aca!">
   </b-jumbotron>
 </div>   
@@ -16,7 +16,7 @@
         </b-form-group>
 
         <b-button class="m-2 px-5" type="submit" variant="primary" @click.prevent='Login'>Login</b-button> 
-        <b-button class="m-2" type="submit" variant="danger" @click.prevent="RecuperarContrasena">Olvidé Contraseña</b-button>
+        
       </b-form>
 
      
@@ -39,27 +39,9 @@ export default {
     let usuario = [this.Contrasena, this.Email]
     store.commit('Login', usuario)
     },
-// Recuperar contraseña a traves de correo electronico 
-    RecuperarContrasena(){
-    if(this.Email!=''){
-          store.dispatch('RecuperarLaContraseña',this.Email)
-        }else{
-// Alert de correo para verificar su existencia
-             this.$buefy.dialog.alert({
-                    title: 'Debes ingresar un correo',
-                    message: 'Ingresa un correo valido para verificar su existencia',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    icon: 'times-circle',
-                    iconPack: 'fa',
-                    ariaRole: 'alertdialog',
-                    ariaModal: true
-                })
-        }
-    }
-    }
     
-}
+    
+}}
 </script>
 <style lang="scss" scoped>
     .banner{
@@ -72,5 +54,24 @@ export default {
     p{
            font-family: 'Roboto', sans-serif;
            font-weight: 500;
-           font-size: 2rem}
+           font-size: 2rem}input{
+      border: 1px solid black;
+    }
+       form
+    {width: 50%;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;background-color: orange!important;
+      border-radius: 15px;
+    }
+    input{
+      border: 1px solid black;
+    }
+    button{
+      color: white;
+    }
+   @media only screen and (max-width: 900px) {
+     form{width: 80%;}
+      
+    }
 </style>

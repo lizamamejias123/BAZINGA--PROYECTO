@@ -4,9 +4,10 @@
      <div>
   <b-jumbotron header="Registrate" class="banner" lead="Registrate y podrás guardar tus series favoritas">   
   </b-jumbotron>
-</div>   
+</div >   
 <!-- Formulario -->
-<b-form class="my-5 container" >
+<div class="body">
+<b-form class="container mt-5">
         <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">
           <b-form-input id="input-1" v-model="Nombre" type="text" required></b-form-input>
           
@@ -30,6 +31,7 @@
         <b-button type="submit" variant="primary" @click.prevent='Registrarte'>Registrarte</b-button>
       </b-form>
     </div>
+    </div>
 </template>
 
 <script>
@@ -41,6 +43,7 @@ export default {
             Email:'',
             Contrasena:'',
             Rep_Contrasena:'',
+            show: true,
         }
     },
     methods:{
@@ -109,9 +112,9 @@ export default {
                     ariaModal: true
                 })
 // Mandar datos
-            let usuario=[this.Nombre,this.Email,this.Contrasena]
+            let user=[this.Nombre,this.Email,this.Contrasena]
 // Mandar el usuario 
-            this.$store.commit('registroDelUsuario',usuario)
+            this.$store.commit('RegistroDelUsuario',user)
 
           }  
         }
@@ -121,6 +124,7 @@ export default {
 
 
 <style lang="scss" scoped>
+    .jumbotron{margin-bottom: 0rem!important;}
     .banner{
         background-image: url(".././assets/img/BG-2.jpg");
           background-position: center center;
@@ -133,4 +137,21 @@ export default {
            font-family: 'Roboto', sans-serif;
            font-weight: 500;
            font-size: 2rem}
+     form
+    {width: 50%;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;background-color: orange!important;
+      border-radius: 15px;
+    }
+    input{
+      border: 1px solid black;
+    }
+    button{
+      color: white;
+    }
+   @media only screen and (max-width: 900px) {
+     form{width: 80%;}
+      
+    }
 </style>

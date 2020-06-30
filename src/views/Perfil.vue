@@ -2,6 +2,7 @@
     <div>
 <!-- Banner -->
   <b-jumbotron class="banner" header="Perfil" lead="¡Tu perfil lo encuentras acá!">
+    <h5>Puedes Editar tu usuario cuando quieras</h5>
   </b-jumbotron>
   <!-- Formulario del perfil -->
 <b-form class="mt-5 container" >
@@ -21,7 +22,7 @@ export default {
     name:'Perfil',
     data() {
       return {
-        Email:'',
+        Correo:'',
         Nombre:'',
         }  
       },
@@ -37,19 +38,8 @@ export default {
         const ExpresionRegular= /\w+@\w+\.+[a-z]/
         // si el correo no es valido
         if(!ExpresionRegular.test(this.PerfilDato[0])){
-        //  Alert sobre correo sin expresion regular
-        this.$buefy.dialog.alert({
-                    title: 'Correo no valido',
-                    message: 'El correo no es valido',
-                    type: 'is-danger',
-                    hasIcon: true,
-                    icon: 'times-circle',
-                    iconPack: 'fa',
-                    ariaRole: 'alertdialog',
-                    ariaModal: true})
           }else{
-        // si es valido, mandar a actualizar
-            store.dispatch('ActualizacionPerfil',i)
+            store.dispatch('ActualizacionPerfil',i)   
           }                       
       }
     }}
@@ -68,7 +58,26 @@ export default {
            font-family: 'Roboto', sans-serif;
            font-weight: 500;
            font-size: 2rem
-        }
+        }input{
+      border: 1px solid black;
+    }
+      form
+    {width: 50%;
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'Roboto', sans-serif;background-color: orange!important;
+      border-radius: 15px;
+    }
+    input{
+      border: 1px solid black;
+    }
+    button{
+      color: white;
+    }
+   @media only screen and (max-width: 900px) {
+     form{width: 80%;}
+      
+    }
     
         
 </style>

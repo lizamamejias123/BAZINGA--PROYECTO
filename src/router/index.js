@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from '../store'
 Vue.use(VueRouter);
 
 const routes = [{
@@ -10,6 +11,7 @@ const routes = [{
 }, {
     path: "/Fav",
     name: "Fav",
+    meta: { Login: true },
     component: () =>
         import ( /* webpackChunkName: "Fav" */ "../views/Fav.vue")
 }, {
@@ -25,6 +27,7 @@ const routes = [{
 }, {
     path: "/Perfil",
     name: "Perfil",
+    meta: { Login: true },
     component: () =>
         import ( /* webpackChunkName: "Perfil" */ "../views/Perfil.vue")
 }, {
@@ -35,7 +38,18 @@ const routes = [{
 }, ];
 
 const router = new VueRouter({
+    mode: 'history',
+    base: process.env.BASE_URL,
     routes
-});
+})
+
+router.beforeEach((to, from, next) => {
+    let authRequired = to.matched.some(route => route.meta.Login);
+    if (!store.state.Idu && authRequired) {
+        next('/Login');
+    } else {
+        next()
+    }
+})
 
 export default router;

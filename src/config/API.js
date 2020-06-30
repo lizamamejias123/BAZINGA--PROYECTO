@@ -3,27 +3,28 @@ import store from '../store/index'
 
 
 export function API() {
-    if (store.state.Busqueda !== '') {
-        axios.get(`https://comicvine.gamespot.com/api/series_list/?api_key=799ffc92c1f12e4b55fd4c8e9c43c067f4015f56&sort=name:asc&filter=name:${store.state.Busqueda}`)
+    if (store.state.Busqueda != '') {
+        axios.get(`http://www.omdbapi.com/?s=${store.state.Busqueda}&apikey=9b66c01&type=series`)
             .then(response => {
-                if (response.data.number_of_total_results != 0) {
-                    store.dispatch('InformacionRecibida', response.data.results)
-                    console.log(data.results)
-
-                } else {
-                    // Alert de
-                    console.log(error)
+                if (response.data.totalResults != 0) {
+                    console.log('aca7')
+                    store.dispatch('InformacionRecibida', response.data.Search)
+                    console.log(response.data.Search)
+                    console.log('aca7')
                 }
             }).catch(error => {
                 console.error(error)
             })
     } else {
-        axios.get('https://comicvine.gamespot.com/api/series_list/?api_key=799ffc92c1f12e4b55fd4c8e9c43c067f4015f56&sort=name:asc&filter=name:legends')
+        axios.get(`http://www.omdbapi.com/?s=batman&apikey=9b66c01&type=series`)
             .then(response => {
-                store.dispatch('InformacionRecibida', response.data.results)
+                store.dispatch('InformacionRecibida', response.data.Search)
+                console.log(response.data)
+                console.log('aca6')
             }).catch(error => {
                 console.error(error)
             })
+
     }
 
 }

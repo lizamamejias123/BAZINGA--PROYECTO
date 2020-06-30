@@ -3,76 +3,85 @@
 <!-- Banner -->
 <b-jumbotron class="banner">
 <!-- Bazinga Imagen -->
-<img src="@/assets/img/bazinga.png" alt="">
+<img src="@/assets/img/bazinga.png" alt="" href="/">
 <!-- Texto Principal -->
    <H1>Bazinga! Tu nuevo buscador de series</H1>
-   <p>Sitio Web destinado a todo tipo de fans de series de ciencia ficción</p>
+   <p>Sitio Web destinado a todo tipo de fans de todas las series</p>
+   <h5 v-if="$store.state.Nombre!==''">Hola {{$store.state.Nombre}}</h5>
+   <h4 v-else> Debes registrarte para añadir series a tus favoritos</h4>
   </b-jumbotron>
   <!-- Buscador -->
 <b-container class="bv-example-row" fluid>
-          <b-container class="my-5">
+          <b-container class="my-3">
             <b-row align-h="center">
-              <b-col cols="8">
+              <b-col cols="10">
                 <b-input-group align-h="center">
                   <b-form-input 
                   size="xl" 
-                  v-model="BuscadorInput" 
+                  v-model="Busqueda" 
                   class="mr-sm-2" 
-                  placeholder="Series..." 
-                  @keyup.enter.prevent="Buscar">
+                  placeholder="Encuentra tu serie... Ej: Arrow">
                   </b-form-input>
                   <b-button 
                   size="xl" 
                   class="ml-2" 
                   variant="primary" 
-                  @click.prevent="Buscar" >Buscar</b-button>
+                  style="color:white"
+                  @click.prevent="Buscar()">Buscar</b-button>
                 </b-input-group>
               </b-col>
             </b-row>
           </b-container>
-  <!--Grillas-->  
-        <!-- <b-container class="bv-example-row">
+    </b-container>
+    <!-- Card de series -->
+    <b-container class="bv-example-row">
           <b-row align-h="center">
             <b-card-group deck v-for="(item,index) in SeriesBuscadas" :key="index">
               <CardSerie 
-              :imagen="item.recipe.image" 
-              :nombre="item.recipe.label" 
-              :uri="item.recipe.uri" 
-              :ingredientes="item.recipe.ingredientLines" 
-              :url="item.recipe.url" :fav="true"></CardSerie>
+              :Poster="item.Poster"
+               :Title="item.Title" 
+               :Year="item.Year" 
+               :imdbID='item.imdbID'
+              :corazon="true"></CardSerie>
             </b-card-group>
           </b-row>
-        </b-container>      -->
-    </b-container>
+        </b-container>     
+    
 </div>
 </template>
 <script>
 
-
+import router from "../router"
 import store from '../store/index'
-import CardSerie from '../components/CardSerie'
+import CardSerie from '../components/CardSerie.vue'
+import axios from 'axios'
+import { API } from '../config/API'
+
 export default {
-    component:{
+    components:{
         CardSerie,
     },
-    data(){return{BuscadorInput:''}
+    data(){
+      return{
+        Busqueda:''}
     },
     methods:{
     Buscar(){
-      if(this.BuscadorInput!=''){
-        store.dispatch('Buscador',this.BuscadorInput)
-        this.BuscadorInput=''
+      if(this.Busqueda!=''){
+        store.dispatch('Buscador',this.Busqueda)
+        this.Busqueda=''
       }else{
-        //   Alert crear sobre que no hay nada
       }  
-    }
+    }},
+    beforeCreate() {
+      API()
     },
+    
     computed:{
     SeriesBuscadas(){
         return store.getters.ListaSerie
-    }
-    }
-}
+    }}
+ }
 </script>
 <style lang="scss" scoped>
     .banner{
@@ -88,7 +97,9 @@ export default {
            font-weight: 500;
            font-size: 2rem;
            color: black;
-        }
+        }input{
+      border: 1px solid black;
+    }
    
     
         

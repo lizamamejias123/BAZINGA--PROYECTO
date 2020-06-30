@@ -1,96 +1,78 @@
 <template>
     <div>
         <b-card
-            :img-src="imagen" no-body img-alt="Image" img-top tag="article" style="max-width: 20rem;" class="mb-2 mx-4" footer-bg-variant="white">
+            :img-src="Poster" 
+            img-alt="Este link no tiene Imagen, Perdon :(" 
+            style=" width: 12rem; background-position: center center;
+          background-size: cover;" 
+            class="mb-2 mx-4 card-img-top" >
             <template v-slot:header>
-                <div v-if="nombre.length<=30">                
-                    {{nombre}}                
-                </div>
-                <div v-else>
-                    {{nombre.slice(0, 30)}}...                
+                <div id="titulo">                
+                   <p><strong>Titulo:</strong> {{Title}}  </p>              
                 </div>
             </template>
-                
-            <template v-slot:footer>           
-                <b-button href="#" variant="danger" v-b-modal="uri" class="mx-2">Ingredientes</b-button>
-                <!--BOTON VISTA HOME-->                   
-                <b-button v-if="fav" href="#" :variant="botonActivo?'outline-danger':'danger'" @click.once="marcar(nombre)" :disabled="botonActivo" class="mx-2">{{botonActivo? 
-                'Guardada':'Favoritos'}}</b-button>                
+            <template >
+                <div>                
+                   <p><strong>Años: </strong>{{Year}}</p>                
+                </div>
+            </template>      
+            <template v-slot:footer class="m-auto">  
 
-            <!--BOTON VISTA FAVORITOS -->
-                <b-button v-else href="#" variant="danger" @click="desmarcar(uri)" class="mx-2">Quitar Favorito</b-button>
+              <b-button v-if="corazon" @click="Like(imdbID)" :disabled="botonActivo"><svg  style="width:30px;height:30px" viewBox="0 0 24 24" >
+          <path
+            :fill="botonActivo?'red':'black'" stroke="red : black"
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          />
+        </svg></b-button>
+
+       <b-button v-else  @click="Hola(imdbID)"><svg style="width:30px;height:30px" viewBox="0 0 24 24">
+          <path
+            fill="red" 
+            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          /></svg></b-button>
+            
             </template>          
-        </b-card>
-        <!--MODAL CONTENEDOR RECETA-->
-        <b-modal :title="nombre" :id="uri" okVariant= 'danger' okTitle= 'Listo' ok-only>
-            <p class="my-4" v-for="(variable,index) in ingredientes" :key="index">{{variable}}</p>
-            <b-row align-h="end"  class="my-3 mr-2">
-                
-            </b-row>
-            <b-button class="mt-3" variant="outline-danger" target="_blank" block :href="url">Receta Original</b-button>        
-        </b-modal>     
+        </b-card>  
     </div>
 </template>
 
 <script>
     import store from '../store/index'
     export default {
+        name:'CardSerie',
         props:{
-            imagen:String,
-            nombre: String,
-            uri: String,
-            url:String,
-            fav:Boolean,
-        },
-        data(){
+            Poster:String,
+            Title: String,
+            Year:String,
+            corazon:Boolean,
+            imdbID:String,
+        }, data(){
             return{
-                //esFav:false
-            }
-        },
+            }},
         methods: {
-            marcar(element){
-                if (store.state.usuarioID!=''){
-                    //this.esFav=true
-                    return store.dispatch('enviarFavorito',element)
-                }else{
-                    //this.esFav=false
-                    Swal.fire({
-                    icon: 'error',
-                    title: 'Logueate',
-                    text: 'Debes tener una cuenta para guardar favoritos',
-                    confirmButtonColor:'#dc3545'
-                    })
+            Like(e){
+                if (store.state.Idu!=''){
+                    return store.dispatch('Favorito',e)
                 }
             },
-            desmarcar(algo){
-                Swal.fire({
-                    title: 'Estás quitando un favorito',
-                    text: "Tendrás que buscarlo nuevamente, cuando lo quieras volver a preparar",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#dc3545',
-                    cancelButtonColor: '#dc3545',
-                    confirmButtonText: 'Sí, bórrate'
-                }).then((result) => {
-                    if (result.value) {
-                        store.state.listaFav.map((element,ind)=>{
-                            if(element.nombre==algo){
-                                store.state.listaFav.splice(ind,1)
-                                return store.dispatch('eliminarFavorito',algo)
-                            }
-                        })                        
-                        // alert eliminado
-                                  
-                    }
-                })
+            Hola(a){
+                let value=true;
+                 console.log('info 1');
+
                 
-            }
-        },//fin methods
+                     store.state.Fav.map((e,i)=>{
+            if(e.imdbID==a){
+                console.log('borrar3') 
+            store.state.Fav.splice(i,1)
+            console.log('borrar2') 
+             return store.dispatch('DeleteFavorito',a)}})
+               console.log('borrar') 
+            },},
         
         computed: {
             botonActivo(){
-                if(store.state.usuarioID!=''){
-                    return store.state.nombresFav.includes(this.nombre)
+                if(store.state.Idu!=''){
+                    return store.state.FavName.includes(this.imdbID)
                 }else{
                     return false
                 }                
@@ -98,3 +80,25 @@
         },
     }
 </script>
+<style lang="scss" scoped>
+img{
+    height: 16rem;
+}
+.card-header{
+    height: 6rem!important;
+    text-align: center!important;
+}
+.card-header div{
+    text-align: center;
+}
+svg{
+    margin:auto
+}
+button{
+    background-color: transparent!important;
+    margin: auto;
+}
+.btn-secondary{border: none!important;}
+#titulo{margin:auto}
+    
+</style>
