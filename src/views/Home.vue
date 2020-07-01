@@ -3,12 +3,12 @@
 <!-- Banner -->
 <b-jumbotron class="banner">
 <!-- Bazinga Imagen -->
-<img src="@/assets/img/bazinga.png" alt="" href="/">
+<img id="bazinga" src="@/assets/img/bazinga.png" alt="" href="/">
 <!-- Texto Principal -->
-   <H1>Bazinga! Tu nuevo buscador de series</H1>
-   <p>Sitio Web destinado a todo tipo de fans de todas las series</p>
+   <H2>Bazinga! Tu nuevo buscador de series</H2>
+   <h3>Sitio Web destinado a todos los fans, de todas las series</h3>
    <h5 v-if="$store.state.Nombre!==''">Hola {{$store.state.Nombre}}</h5>
-   <h4 v-else> Debes registrarte para añadir series a tus favoritos</h4>
+   <h5 v-else> Debes registrarte para añadir series a tus favoritos</h5>
   </b-jumbotron>
   <!-- Buscador -->
 <b-container class="bv-example-row" fluid>
@@ -19,14 +19,12 @@
                   <b-form-input 
                   size="xl" 
                   v-model="Busqueda" 
-                  class="mr-sm-2" 
                   placeholder="Encuentra tu serie... Ej: Arrow">
                   </b-form-input>
                   <b-button 
                   size="xl" 
                   class="ml-2" 
                   variant="primary" 
-                  style="color:white"
                   @click.prevent="Buscar()">Buscar</b-button>
                 </b-input-group>
               </b-col>
@@ -34,7 +32,7 @@
           </b-container>
     </b-container>
     <!-- Card de series -->
-    <b-container class="bv-example-row">
+    <b-container>
           <b-row align-h="center">
             <b-card-group deck v-for="(item,index) in SeriesBuscadas" :key="index">
               <CardSerie 
@@ -42,11 +40,11 @@
                :Title="item.Title" 
                :Year="item.Year" 
                :imdbID='item.imdbID'
-              :corazon="true"></CardSerie>
+              :corazon="true"
+              ></CardSerie>
             </b-card-group>
           </b-row>
         </b-container>     
-    
 </div>
 </template>
 <script>
@@ -58,6 +56,7 @@ import axios from 'axios'
 import { API } from '../config/API'
 
 export default {
+    name:'Home',
     components:{
         CardSerie,
     },
@@ -70,37 +69,21 @@ export default {
       if(this.Busqueda!=''){
         store.dispatch('Buscador',this.Busqueda)
         this.Busqueda=''
-      }else{
-      }  
+      } 
     }},
     beforeCreate() {
       API()
     },
-    
     computed:{
     SeriesBuscadas(){
         return store.getters.ListaSerie
     }}
  }
 </script>
-<style lang="scss" scoped>
-    .banner{
-        background-image: url(".././assets/img/BG-0.jpg");
-          background-position: center center;
-          background-size: cover;
-        }
-        h1{
-          font-family: 'Bangers', cursive;
-          color: #E72831;
-        }p{
-           font-family: 'Roboto', sans-serif;
-           font-weight: 500;
-           font-size: 2rem;
-           color: black;
-        }input{
-      border: 1px solid black;
-    }
-   
-    
-        
+<style lang="scss">
+.banner{
+  background-image: url(".././assets/img/BG-0.jpg")!important;
+  background-position: center center;
+  background-size: cover;}
+  #bazinga{height: 10rem;}
 </style>

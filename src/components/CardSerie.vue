@@ -3,9 +3,8 @@
         <b-card
             :img-src="Poster" 
             img-alt="Este link no tiene Imagen, Perdon :(" 
-            style=" width: 12rem; background-position: center center;
-          background-size: cover;" 
-            class="mb-2 mx-4 card-img-top" >
+            class="mb-3 mx-4 card-img-top"
+            id="card" >
             <template v-slot:header>
                 <div id="titulo">                
                    <p><strong>Titulo:</strong> {{Title}}  </p>              
@@ -17,20 +16,12 @@
                 </div>
             </template>      
             <template v-slot:footer class="m-auto">  
-
               <b-button v-if="corazon" @click="Like(imdbID)" :disabled="botonActivo"><svg  style="width:30px;height:30px" viewBox="0 0 24 24" >
-          <path
-            :fill="botonActivo?'red':'black'" stroke="red : black"
-            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
-          />
-        </svg></b-button>
-
-       <b-button v-else  @click="Hola(imdbID)"><svg style="width:30px;height:30px" viewBox="0 0 24 24">
-          <path
-            fill="red" 
-            d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          <path :fill="botonActivo?'red':'#0069d9'" stroke="red : #0069d9" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
           /></svg></b-button>
-            
+       <b-button v-else  @click="Dislike(imdbID)"><svg style="width:30px;height:30px" viewBox="0 0 24 24">
+          <path fill="red" d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z"
+          /></svg></b-button>
             </template>          
         </b-card>  
     </div>
@@ -46,29 +37,27 @@
             Year:String,
             corazon:Boolean,
             imdbID:String,
-        }, data(){
-            return{
-            }},
+        },
         methods: {
             Like(e){
                 if (store.state.Idu!=''){
                     return store.dispatch('Favorito',e)
+                }else{
+                    alertify.set('notifier', 'position', 'bottom-left');
+                    alertify.error('Debes tener cuenta para añadir a favoritos :(')
                 }
             },
-            Hola(a){
+            Dislike(a){
                 let value=true;
-                 console.log('info 1');
-
-                
-                     store.state.Fav.map((e,i)=>{
-            if(e.imdbID==a){
-                console.log('borrar3') 
-            store.state.Fav.splice(i,1)
-            console.log('borrar2') 
-             return store.dispatch('DeleteFavorito',a)}})
-               console.log('borrar') 
-            },},
-        
+                store.state.Fav.map((e,i)=>{
+                    if(e.imdbID==a){
+                        store.state.Fav.splice(i,1)
+                            return store.dispatch('DeleteFavorito',a)
+                        }
+                    }     
+                )
+            },
+        }, 
         computed: {
             botonActivo(){
                 if(store.state.Idu!=''){
@@ -98,7 +87,15 @@ button{
     background-color: transparent!important;
     margin: auto;
 }
-.btn-secondary{border: none!important;}
-#titulo{margin:auto}
+.btn-secondary{
+    border: none!important;
+    }
+#titulo{
+    margin:auto
+}
+#card{
+    width: 12rem; 
+    background-position: center center;
+    background-size: cover;}
     
 </style>

@@ -1,22 +1,18 @@
 <template>
-    <div class="banner">
-       <div>
+    <div>
 <!-- Banner -->
-  <b-jumbotron class="banner" header="Error 404">
-      <div class="home_text">
-   <h3>¿Andas perdido?, Presiona el logo de Bazinga! y andaté al home</h3>
-   </div>
+  <b-jumbotron class="banner" >
+   <h1>Error 404</h1>
+   <h3 class="home_text">¿Andas perdido?, Presiona el logo de Bazinga! y andaté al home</h3>
   </b-jumbotron>
-
-</div>
+  <div id="ESPACIO">
+  </div>
     </div>
 </template>
 <script>
 
 export default {
-    component:{
-
-    }
+    name:'NotFound',
 }
 </script>
 <style lang="scss" scoped>
@@ -27,8 +23,6 @@ export default {
           color: black;
         }
     .home_text{
-            padding: 50px;
+            padding-bottom: 100px;
         }
-    
-        
 </style>

@@ -1,10 +1,12 @@
 <template>
     <div>
 <!-- Banner -->
-  <b-jumbotron class="banner" header="Perfil" lead="¡Tu perfil lo encuentras acá!">
+  <b-jumbotron class="banner3">
+    <h1>Perfil</h1>
+    <h3>¡Tu perfil lo encuentras acá!</h3>
     <h5>Puedes Editar tu usuario cuando quieras</h5>
   </b-jumbotron>
-  <!-- Formulario del perfil -->
+<!-- Formulario del perfil -->
 <b-form class="mt-5 container" >
         <b-form-group id="input-group-1" label="Nombre:" label-for="input-1">
           <b-form-input id="input-1" v-model='PerfilDato[1]' type="text" required></b-form-input>
@@ -44,40 +46,10 @@ export default {
       }
     }}
 </script>
-<style lang="scss" scoped>
-    .banner{
+<style lang="scss">
+    .banner3{
         background-image: url(".././assets/img/BG-4.jpg");
-          background-position: center center;
-          background-size: cover;
-          color: black;
-        }
-    h1{
-          font-family: 'Bangers', cursive  
-        }
-        p{
-           font-family: 'Roboto', sans-serif;
-           font-weight: 500;
-           font-size: 2rem
-        }input{
-      border: 1px solid black;
-    }
-      form
-    {width: 50%;
-    color: white;
-    font-size: 1.5rem;
-    font-family: 'Roboto', sans-serif;background-color: orange!important;
-      border-radius: 15px;
-    }
-    input{
-      border: 1px solid black;
-    }
-    button{
-      color: white;
-    }
-   @media only screen and (max-width: 900px) {
-     form{width: 80%;}
-      
-    }
-    
-        
+        background-position: center center;
+        background-size: cover;
+        color: black;}
 </style>

@@ -2,7 +2,7 @@
 
     <div>
 <!-- Inicio Navbar -->
-  <b-navbar toggleable="lg" class="transparent">
+    <b-navbar toggleable="lg" class="transparent">
 <!-- Logo -->
     <router-link to="/" class="nav-link"><img class="navbar_img mr-auto" src="@/assets/img/bazinga.png" alt="logo"></router-link>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -14,15 +14,13 @@
 <!-- Registrate / Favoritos -->
         <b-navbar-nav v-if=this.$store.state.ver>
       <router-link to="/RegistroUser" class="nav-link" >Registrate</router-link> </b-navbar-nav>
-
         <b-navbar-nav v-if=!this.$store.state.ver>
       <router-link to="/Fav" class="nav-link">Favorito</router-link> </b-navbar-nav>
 
 <!-- Login / Perfil-->
-<b-navbar-nav v-if=this.$store.state.ver>
-<router-link to="/Login" class="nav-link">Login</router-link> </b-navbar-nav>
-       
-        <b-nav-item-dropdown id="dropdown" right  v-if=!this.$store.state.ver>
+      <b-navbar-nav v-if=this.$store.state.ver>
+        <router-link to="/Login" class="nav-link">Login</router-link> </b-navbar-nav>
+        <b-nav-item-dropdown id="dropdown" right v-if=!this.$store.state.ver>
           <template v-slot:button-content>
 <!-- Perfil con Nombre -->
           <em>{{$store.state.Nombre}}</em>
@@ -57,12 +55,13 @@ export default {
     .transparent{
         background-color: #0069D9!important;
     }
-    a{color: white!important;
-    font-size: 1.5rem;}
+    a{
+      color: white!important;
+      font-size: 1.5rem;}
     a:hover{
       color: orange!important;
     }
-   li a{
+    li a{
       color: black!important;
    } 
     

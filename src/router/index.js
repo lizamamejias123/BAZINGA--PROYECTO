@@ -15,12 +15,21 @@ const routes = [{
     component: () =>
         import ( /* webpackChunkName: "Fav" */ "../views/Fav.vue")
 }, {
+    path: '/Favorito',
+    redirect: '/Fav'
+}, {
+    path: '/Favoritos',
+    redirect: '/Fav'
+}, {
+    path: '/Elegidos',
+    redirect: '/Fav'
+}, {
     path: "/Login",
     name: "Login",
     component: () =>
         import ( /* webpackChunkName: "Login" */ "../views/Login.vue")
 }, {
-    path: "/NotFound",
+    path: "*",
     name: "NotFound",
     component: () =>
         import ( /* webpackChunkName: "NotFound" */ "../views/NotFound.vue")

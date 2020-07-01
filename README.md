@@ -6,6 +6,7 @@ Bazinga es un Sitio Web en el cual puedes encontrar información de Series de ci
 
 ## Guia de Estilo
 
+<img style="margin:auto" width="500px" alt="bazinga" src="/public/img/icons/GuiaEstilo.png">
 
 ## Diseño
 
